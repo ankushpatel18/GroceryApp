@@ -29,7 +29,7 @@ export function* authenticateUser(action) {
 }
 
 /*
-  * Call Open Id server authentication Api
+  * Login API call
 */
 export function* performUserAuthentication(payload) {
         const state = yield select()
@@ -55,7 +55,7 @@ export function* performUserAuthentication(payload) {
 
 
 /*
-  *Validate user credentials on client end
+  *Local validations
 */
 export function validateUserCredentials(username, password) {
     return (!(_.isEmpty(username) || _.isEmpty(password)))

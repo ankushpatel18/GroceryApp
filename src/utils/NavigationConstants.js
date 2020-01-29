@@ -5,5 +5,5 @@ export default {
     PRODUCT_DETAILS_SCREEN: "ProductDetailsScreen",
     MY_ORDERS_LIST :'MyOrderListScreen',
     APPLICATION_STACK: 'AppStack',
-    PROUDCTS_STACK: 'DashboardScreen',
+    HOME_NAVIGATOR: 'HomeNavigator',
 }

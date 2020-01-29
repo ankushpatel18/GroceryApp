@@ -9,6 +9,7 @@ import { Provider } from 'react-redux';
 import store from './src/redux/store';
 import * as COLORS from './src/utils/colors';
 import BaseContainer from './src/BaseContainer';
+import AppContainer from './src/AppNavigation';
 
 
 export default class Application extends Component {
@@ -36,7 +37,7 @@ export default class Application extends Component {
             backgroundColor={COLORS.WHITE_COLOR}
             barStyle='dark-content' />
             <Text>Grocery store app</Text>
-             <BaseContainer />
+             <AppContainer />
         </SafeAreaView>
       </Provider>
     );

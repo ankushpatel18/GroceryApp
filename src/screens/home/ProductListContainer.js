@@ -1,6 +1,6 @@
 
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+import { View, Text } from 'react-native';
 import { connect } from 'react-redux';
 
 
@@ -12,7 +12,9 @@ class ProductListContainer extends Component {
 
     render() {
         return (
+            <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>  
             <Text>List of e-commorce products will be shown here</Text>
+            </View>
         );
     }
 }

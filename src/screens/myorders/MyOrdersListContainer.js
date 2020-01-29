@@ -2,6 +2,7 @@
 import React, { Component } from 'react';
 import { Text, View } from 'react-native';
 import { connect } from 'react-redux';
+import Style from './style';
 
 
 class MyOrdersListContainer extends Component {
@@ -11,8 +12,8 @@ class MyOrdersListContainer extends Component {
     }
 
     render() {
-        return (<View style ={flexDirection= 'row',
-        alignItems= 'center'} >
+        return (
+            <View style={Style.centerContainer}>  
             <Text>List of previous successful orders will be shown here</Text>
             </View>
         );
