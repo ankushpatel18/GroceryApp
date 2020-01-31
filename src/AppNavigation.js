@@ -12,9 +12,11 @@ import ProductDetailsContainer from './screens/home/ProductListContainer';
 import MyOrderListContainer from './screens/myorders/MyOrdersListContainer';
 import actualDimensions from './utils/DeviceDimension';
 
+//Add all screens related to product and product details in this stack
 const ProductListStackNavigator = createStackNavigator(
   {
     DashboardNavigator: ProductListContainer,
+    ProductDetails : ProductDetailsContainer,
   },
   {
     defaultNavigationOptions: ({navigation}) => {
@@ -33,6 +35,7 @@ const ProductListStackNavigator = createStackNavigator(
   },
 );
 
+//My order related screens will be added in this stack
 const MyOrderStackNavigator = createStackNavigator(
   {
     MyOrder: MyOrderListContainer,
@@ -65,7 +68,7 @@ const AppDrawerNavigator = createDrawerNavigator(
   },
   {
     drawerPosition: 'left',
-    // contentComponent: props => <AppDrawer {...props} />,
+    // contentComponent: props => <AppDrawer {...props} />,     //use this for custom navigation drawer
     drawerWidth: actualDimensions.width * 0.6,
     drawerType: 'slide',
     minSwipeDistance: 20,
