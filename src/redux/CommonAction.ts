@@ -8,6 +8,11 @@ export function changeInternetState(internetState): Action {
   }
 }
 
+export function selectProfilePicture() {
+  return {
+    type : Actions.PICK_PROFILE_PICTURE
+  }
+}
 export function resetAppState() {
   return {
     type: Actions.RESET_APP_STATE,
