@@ -38,6 +38,8 @@ target 'GroceryApp' do
 
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
 
+  pod 'TouchID', :path => '../node_modules/react-native-touch-id'
+
   target 'GroceryAppTests' do
     inherit! :search_paths
     # Pods for testing
