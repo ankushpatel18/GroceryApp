@@ -2,12 +2,12 @@
 import React, { Component } from 'react';
 import { Text } from 'react-native';
 import { connect } from 'react-redux';
-
-
+import LogHOC from '../../custom_components/LogHOC'
+let TAG = 'ProductDetailsContainer';
 class ProductDetailsContainer extends Component {
 
-    constructor (props) {
-        super (props);
+    constructor(props) {
+        super(props);
     }
 
     render() {
@@ -18,4 +18,4 @@ class ProductDetailsContainer extends Component {
 }
 
 const MyComponent = connect(null, null)(ProductDetailsContainer)
-export default MyComponent;
+export default LogHOC(MyComponent, TAG);
