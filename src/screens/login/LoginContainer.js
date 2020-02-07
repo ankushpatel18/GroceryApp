@@ -7,48 +7,31 @@ import NavigationScreens from '../../utils/NavigationConstants';
 import { authenticateUser } from './LoginActions';
 import Style from './style';
 import NavigationConstants from '../../utils/NavigationConstants';
-import TouchID from 'react-native-touch-id';
+import LogHOC from '../../custom_components/LogHOC';
 
+let TAG = 'LoginContainer';
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
+
   }
 
   componentDidUpdate(prevProps) {
     if (this.props.userAuthenticated) {
-      //navigate to dashboard screen once Login
-      this.props.navigation.navigate(NavigationScreens.DASHBOARD);
+      this.props.navigation.navigate(NavigationScreens.HOME_NAVIGATOR);
     }
   }
 
-  _onTouchIdSelection() {
-    TouchID.authenticate('Authenticate with Touch ID')
-      .then(success => {
-        // Success code
-        this.props.navigation.navigate(NavigationConstants.HOME_NAVIGATOR)
-      })
-      .catch(error => {
-        // Failure code
-        Alert.alert('Failure');
-      });
-
-  }
-
   render() {
+    console.log('rendering login called');
     return (
       <View style={Style.centerContainer}>
-        <Text>Login screen will be shown here</Text>
         <Button
           buttonStyle={Style.primareButton}
           title="Login Now"
           onPress={() =>
             this.props.navigation.navigate(NavigationConstants.HOME_NAVIGATOR)
           }
-        />
-        <Button
-          buttonStyle={Style.primareButton}
-          title="Authenticate with Touch ID"
-          onPress={() => this._onTouchIdSelection()}
         />
       </View>
     );
@@ -74,4 +57,4 @@ const MyComponent = connect(
   mapStateToProps,
   mapDispatchToProps,
 )(LoginContainer);
-export default MyComponent;
+export default LogHOC(MyComponent, TAG);

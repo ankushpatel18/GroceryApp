@@ -1,9 +1,9 @@
 export default {
     LAUNCHER_SCREEN: 'LauncherScreen',
     LOGIN: 'LoginScreen',
-    DASHBOARD: 'DashboardScreen',
+    LOCAL_LOGIN: 'LocalLogin',
     PRODUCT_DETAILS_SCREEN: "ProductDetailsScreen",
-    MY_ORDERS_LIST :'MyOrderListScreen',
+    MY_ORDERS_LIST: 'MyOrderListScreen',
     APPLICATION_STACK: 'AppStack',
     HOME_NAVIGATOR: 'HomeNavigator',
 }

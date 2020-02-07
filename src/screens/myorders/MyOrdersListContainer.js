@@ -5,11 +5,11 @@ import { connect } from 'react-redux';
 import Style from './style';
 import MapView, { PROVIDER_GOOGLE } from 'react-native-maps'; // remove PROVIDER_GOOGLE import if not using Google Maps
 
-
+let TAG = 'MyOrdersListContainer';
 class MyOrdersListContainer extends Component {
 
-    constructor (props) {
-        super (props);
+    constructor(props) {
+        super(props);
     }
 
 
@@ -34,4 +34,4 @@ class MyOrdersListContainer extends Component {
 }
 
 const MyComponent = connect(null, null)(MyOrdersListContainer)
-export default MyComponent;
+export default LogHOC(MyComponent, TAG);

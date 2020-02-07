@@ -35,7 +35,6 @@ export default class Application extends Component {
           <StatusBar
             backgroundColor={COLORS.WHITE_COLOR}
             barStyle='dark-content' />
-            <Text>Grocery store app</Text>
              <BaseContainer />
         </SafeAreaView>
       </Provider>
