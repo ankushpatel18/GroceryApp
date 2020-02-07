@@ -25,14 +25,14 @@ const ProductListStackNavigator = createStackNavigator(
     defaultNavigationOptions: ({ navigation }) => {
       return {
         title: 'Listing',
-        headerLeft: (
-          <Icon
-            style={{ paddingLeft: 10 }}
-            onPress={() => navigation.openDrawer()}
-            name="md-menu"
-            size={30}
-          />
-        ),
+        // headerLeft: (
+        //   <Icon
+        //     style={{ paddingLeft: 10 }}
+        //     onPress={() => navigation.openDrawer()}
+        //     name="md-menu"
+        //     size={30}
+        //   />
+        // ),
       };
     },
   },

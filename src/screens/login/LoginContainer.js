@@ -13,6 +13,7 @@ let TAG = 'LoginContainer';
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
+
   }
 
   componentDidUpdate(prevProps) {
@@ -22,6 +23,7 @@ class LoginContainer extends Component {
   }
 
   render() {
+    console.log('rendering login called');
     return (
       <View style={Style.centerContainer}>
         <Button
