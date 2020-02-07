@@ -76,6 +76,7 @@ function mapStateToProps(state) {
 
 function mapDispatchToProps(dispatch) {
   return {
+    
     updateInternetState: internetState => {
       dispatch(changeInternetState(internetState));
     }

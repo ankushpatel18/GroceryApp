@@ -184,7 +184,12 @@ dependencies {
     implementation project(':react-native-device-info')
     implementation fileTree(dir: "libs", include: ["*.jar"])
     implementation "com.facebook.react:react-native:+"  // From node_modules
-
+     implementation(project(':react-native-maps')){
+       exclude group: 'com.google.android.gms', module: 'play-services-base'
+       exclude group: 'com.google.android.gms', module: 'play-services-maps'
+   }
+    implementation "com.google.android.gms:play-services-base:17.1.0"
+    implementation "com.google.android.gms:play-services-maps:$rootProject.ext.playServicesVersion"
     implementation 'androidx.appcompat:appcompat:1.1.0-rc01'
     implementation 'androidx.swiperefreshlayout:swiperefreshlayout:1.1.0-alpha02'
     if (enableHermes) {
