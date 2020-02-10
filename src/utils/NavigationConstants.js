@@ -6,4 +6,5 @@ export default {
     MY_ORDERS_LIST: 'MyOrderListScreen',
     APPLICATION_STACK: 'AppStack',
     HOME_NAVIGATOR: 'HomeNavigator',
+    LOCATION_PICKER: 'LocationPicker',
 }
