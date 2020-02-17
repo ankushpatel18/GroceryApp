@@ -5,9 +5,12 @@ const PRODUCTS = {
     properties: {
         id: 'int',
         title: 'string',
-        artist: 'string',
-        image: 'string',
-        thumbnail_image: 'string',
+        subtitle: 'string',
+        author: 'string',
+        published: 'string',
+        publisher: 'string',
+        description: 'string',
+        website: 'string',
         price: 'int'
     }
 }
@@ -18,9 +21,12 @@ const ORDERS = {
     properties: {
         id: 'int',
         title: 'string',
-        artist: 'string',
-        image: 'string',
-        thumbnail_image: 'string',
+        subtitle: 'string',
+        author: 'string',
+        published: 'string',
+        publisher: 'string',
+        description: 'string',
+        website: 'string',
         price: 'int',
         time_stamp: 'string',
         location: 'int',
