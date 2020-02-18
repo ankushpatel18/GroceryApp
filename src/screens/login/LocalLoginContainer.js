@@ -28,6 +28,10 @@ class LocalLoginContainer extends Component {
           this._showFingerPrintAuth();
         }
       })
+      //if not supported
+      if (!this.state.isBiometerySupported) {
+        this.props.navigation.navigate(NavigationScreens.LOGIN);
+      }
   }
 
   componentDidUpdate() {

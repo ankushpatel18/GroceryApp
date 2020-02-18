@@ -1,38 +1,53 @@
 import React, {Component} from 'react';
-import {View, Text, Button} from 'react-native';
+import {View, Text, Button, ActivityIndicator} from 'react-native';
 import {connect} from 'react-redux';
 import NavigationConstants from '../../utils/NavigationConstants';
-// import ProductRepo from '../../database/ProductRepo';
+import { ProductList } from '../components/ProductList';
+import { fetchProductsFromServer } from './ProudctListActions';
+import Log from '../../utils/Logger';
 
 class ProductListContainer extends Component {
-  constructor(props) {
+
+  TAG = "ProductListContainer"
+  constructor(props){
     super(props);
+    this.state ={ isLoading: true}
   }
 
   async componentDidMount() {
-    //sample to query
-    // const productRepo = await ProductRepo.build();
-    // var product1 = {
-    //     id: 1,
-    //     title: 'abc',
-    //     artist: 'abc',
-    //     image: 'abc,
-    //     thumbnail_image: 'efg',
-    //     price:200
-    // };
-    // await productRepo.deleteProducts();
-    // await productRepo.saveProduct(product1);
-    // const products = await productRepo.getProducts();
-    // products.forEach(element => {
-    //     console.log('element ' + element);
-    //     console.log('element ' + element.name);
-    // });
+    // this.props.fetchLatestProducts();
+    return fetch('https://us-central1-test-app-6ef40.cloudfunctions.net/app/products')
+    .then((response) => response.json())
+    .then((responseJson) => {
+      console.log('API response')
+      console.log((responseJson))
+      Log.i(this.TAG, 'api response' + (responseJson))
+
+      this.setState({
+        isLoading: false,
+        dataSource: responseJson.products,
+      }, function(){
+
+      });
+
+    })
+    .catch((error) =>{
+      console.error(error);
+    });
+  
   }
 
   render() {
+    if(this.state.isLoading){
+      return(
+        <View style={{flex: 1, padding: 20}}>
+          <ActivityIndicator/>
+        </View>
+      )
+    }
     return (
       <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <Text>List of e-commorce products will be shown here</Text>
+        <ProductList dataSource = {this.state.dataSource} />
         <Button
         title = "Pick a location"
           onPress={() =>
@@ -44,5 +59,14 @@ class ProductListContainer extends Component {
   }
 }
 
-const MyComponent = connect(null, null)(ProductListContainer);
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    fetchLatestProducts: () => {
+      dispatch(fetchProductsFromServer());
+    }
+  }
+}
+
+const MyComponent = connect(null, mapDispatchToProps)(ProductListContainer);
 export default MyComponent;
