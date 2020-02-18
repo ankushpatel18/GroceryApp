@@ -30,7 +30,9 @@ const ORDERS = {
         price: 'int',
         time_stamp: 'string',
         location: 'int',
-        address: 'string'
+        address: 'string',
+        quantity: 'int',
+        status: 'int'
     }
 }
 
