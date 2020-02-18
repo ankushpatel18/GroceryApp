@@ -1,6 +1,6 @@
-import React, {Component} from 'react';
+import React, { Component } from 'react';
 import {View, Text, Button, ActivityIndicator} from 'react-native';
-import {connect} from 'react-redux';
+import { connect } from 'react-redux';
 import NavigationConstants from '../../utils/NavigationConstants';
 import { ProductList } from '../components/ProductList';
 import { fetchProductsFromServer } from './ProudctListActions';
@@ -46,14 +46,14 @@ class ProductListContainer extends Component {
       )
     }
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <ProductList dataSource = {this.state.dataSource} />
         <Button
-        title = "Pick a location"
+          title="Pick a location"
           onPress={() =>
             this.props.navigation.navigate(NavigationConstants.LOCATION_PICKER)
-          }/>
-          
+          } />
+
       </View>
     );
   }
