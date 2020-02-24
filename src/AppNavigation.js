@@ -9,7 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import LoginContainer from './screens/login/LoginContainer';
 import LocalLoginContainer from './screens/login/LocalLoginContainer';
 import ProductListContainer from './screens/home/ProductListContainer';
-import ProductDetailsContainer from './screens/home/ProductListContainer';
+import ProductDetailsContainer from './screens/productdetails/ProductDetailsContainer';
 import MyOrderListContainer from './screens/myorders/MyOrdersListContainer';
 import LocationPickerContainer from './screens/map/LocationPickerContainer';
 import actualDimensions from './utils/DeviceDimension';
@@ -26,14 +26,14 @@ const ProductListStackNavigator = createStackNavigator(
     defaultNavigationOptions: ({navigation}) => {
       return {
         title: 'Listing',
-        // headerLeft: (
-        //   <Icon
-        //     style={{ paddingLeft: 10 }}
-        //     onPress={() => navigation.openDrawer()}
-        //     name="md-menu"
-        //     size={30}
-        //   />
-        // ),
+        headerLeft: (
+          <Icon
+            style={{ paddingLeft: 10 }}
+            onPress={() => navigation.openDrawer()}
+            name="md-menu"
+            size={30}
+          />
+        ),
       };
     },
   },

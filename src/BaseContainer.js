@@ -23,7 +23,21 @@ class BaseContainer extends Component {
 
   componentDidMount() {
     this.internetSubscription = NetInfo.addEventListener(state => {
-      this._handleInternetConnection;
+      Log.i(TAG_BASE_CONTAINER, `state.isInternetReachable = ` +state.isInternetReachable);
+      Log.i(TAG_BASE_CONTAINER, `state.isConnected = ` +state.isConnected);
+      const internetState = {
+        isInternetReachable: state.isInternetReachable,
+        isConnected: state.isConnected,
+      };
+      this.props.updateInternetState(internetState);
+      if (
+        !(internetState.isInternetReachable && internetState.isConnected) &&
+        internetState.isInternetReachable != undefined ) {
+        Log.i(TAG_BASE_CONTAINER, `No internet`);
+      }
+      else {
+        Log.i(TAG_BASE_CONTAINER, `Internet connected`);
+      }
     });
   }
 
@@ -43,19 +57,6 @@ class BaseContainer extends Component {
       this.internetSubscription();
     }
   }
-
-  _handleInternetConnection = state => {
-    const internetState = {
-      isInternetReachable: state.isInternetReachable,
-      isConnected: state.isConnected,
-    };
-    this.props.updateInternetState(internetState);
-    if (
-      !(internetState.isInternetReachable && internetState.isConnected) &&
-      internetState.isInternetReachable != undefined ) {
-      Log.i(TAG_BASE_CONTAINER, `No internet`);
-    }
-  };
 }
 
 function mapStateToProps(state) {
