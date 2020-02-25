@@ -1,76 +1,75 @@
-import React, {Component} from 'react';
-import {View, Text, Button, ActivityIndicator, StyleSheet} from 'react-native';
-import {connect} from 'react-redux';
+import React, { Component } from 'react';
+import { View, ActivityIndicator } from 'react-native';
+import { connect } from 'react-redux';
 import NavigationConstants from '../../utils/NavigationConstants';
-import {fetchProductsFromServer} from './ProudctListActions';
-import {FlatList} from 'react-native-gesture-handler';
-import ProductListItem from '../../components/ProductListItem';
+import MyButton from './../components/MyButton';
+import { ProductList } from '../components/ProductList';
+impoty
+import { fetchProductsFromServer } from './ProudctListActions';
+import Log from '../../utils/Logger';
+
 
 class ProductListContainer extends Component {
+
+  TAG = "ProductListContainer"
   constructor(props) {
     super(props);
-    this.state = {isLoading: true, dataSource: []};
+    this.state = { isLoading: true }
   }
 
   async componentDidMount() {
-    console.log('componentDidMount Called');
-    this.props.fetchLatestProducts();
+    // this.props.fetchLatestProducts();
+    return fetch('https://us-central1-test-app-6ef40.cloudfunctions.net/app/products')
+      .then((response) => response.json())
+      .then((responseJson) => {
+        console.log('API response')
+        console.log((responseJson))
+        Log.i(this.TAG, 'api response' + (responseJson))
+
+        this.setState({
+          isLoading: false,
+          dataSource: responseJson.products,
+        }, function () {
+
+        });
+
+      })
+      .catch((error) => {
+        console.error(error);
+      });
+
   }
 
   render() {
     if (this.state.isLoading) {
       return (
-        <View style={{flex: 1, padding: 20}}>
+        <View style={{ flex: 1, padding: 20 }}>
           <ActivityIndicator />
         </View>
-      );
+      )
     }
     return (
-      <View style={{flex: 1, alignItems: 'center', justifyContent: 'center'}}>
-        <FlatList
-          style={{alignSelf: 'stretch'}}
-          data={this.props.productsList}
-          renderItem={ProductListItem}
-          keyExtractor={item => item.product_id}
-          numColumns={2}
-        />
-        <Button
+      <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+        <ProductList dataSource={this.state.dataSource} />
+        <MyButton
           title="Pick a location"
-          onPress={() =>
+          customClick={() =>
             this.props.navigation.navigate(NavigationConstants.LOCATION_PICKER)
-          }
-        />
+          } />
+
       </View>
     );
   }
+}
 
-  componentDidUpdate(prevProps) {
-    if (this.state.dataSource.length == 0) {
-      console.log('Total products found ' + this.props.productsList.length);
-      this.setState({
-        isLoading: false,
-        dataSource: this.props.productsList,
-      });
+const mapDispatchToProps = (dispatch) => {
+
+  return {
+    fetchLatestProducts: () => {
+      dispatch(fetchProductsFromServer());
     }
   }
 }
 
-const mapDispatchToProps = dispatch => {
-  return {
-    fetchLatestProducts: () => {
-      dispatch(fetchProductsFromServer());
-    },
-  };
-};
-const mapStateToProps = state => {
-  const {productListReducer} = state;
-  return {
-    ...productListReducer,
-  };
-};
-const MyComponent = connect(
-  mapStateToProps,
-  mapDispatchToProps,
-)(ProductListContainer);
-
+const MyComponent = connect(null, mapDispatchToProps)(ProductListContainer);
 export default MyComponent;

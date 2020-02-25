@@ -20,18 +20,17 @@ class LocalLoginContainer extends Component {
     TouchID.isSupported()
       .then(biometryType => {
         console.log('biometryType:' + biometryType);
-        if (biometryType === 'TouchID') {
+        if (biometryType === 'TouchID' || biometryType == true) {
           this.setState({ isBiometerySupported: true });
           this._showFingerPrintAuth();
-        } else if (biometryType == true) {
-          this.setState({ isBiometerySupported: true });
-          this._showFingerPrintAuth();
+        } else {
+          this.props.navigation.navigate(NavigationScreens.LOGIN);
         }
       })
-      //if not supported
-      if (!this.state.isBiometerySupported) {
+      .catch(err => {
+        console.log('TouchID error' + err.message)
         this.props.navigation.navigate(NavigationScreens.LOGIN);
-      }
+      });
   }
 
   componentDidUpdate() {

@@ -1,7 +1,8 @@
 
 import React, { Component } from 'react';
-import { Text } from 'react-native';
+
 import { connect } from 'react-redux';
+import MyText from '../components/MyText';
 import LogHOC from '../../custom_components/LogHOC'
 let TAG = 'ProductDetailsContainer';
 class ProductDetailsContainer extends Component {
@@ -12,7 +13,7 @@ class ProductDetailsContainer extends Component {
 
     render() {
         return (
-            <Text>Details of e-commorce products will be shown here</Text>
+            <MyText text="Details of e-commorce products will be shown here"></MyText>
         );
     }
 }

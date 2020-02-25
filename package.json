@@ -7,22 +7,24 @@
     "ios": "react-native run-ios",
     "start": "react-native start",
     "test": "jest",
-    "lint": "eslint ."
+    "lint": "eslint .",
+    "postinstall": "npx jetify"
   },
   "dependencies": {
     "@react-native-community/masked-view": "0.1.6",
-    "@react-native-community/netinfo": "^5.5.0",
-    "@react-native-firebase/app": "^6.3.3",
-    "@react-native-firebase/auth": "^6.3.3",
-    "lodash": "^4.17.15",
+    "@react-native-community/netinfo": "5.5.0",
+    "@react-native-firebase/app": "6.3.3",
+    "@react-native-firebase/auth": "6.3.3",
+    "lodash": "4.17.15",
     "react": "16.9.0",
     "react-native": "0.61.5",
     "react-native-device-info": "5.5.1",
     "react-native-elements": "1.2.7",
     "react-native-gesture-handler": "1.5.3",
-    "react-native-image-picker": "^2.3.0",
-    "react-native-location": "^2.5.0",
+    "react-native-image-picker": "2.3.0",
+    "react-native-location": "2.5.0",
     "react-native-maps": "0.26.1",
+    "react-native-oauth": "git+https://github.com/bansalsneha/react-native-oauth.git",
     "react-native-reanimated": "1.7.0",
     "react-native-safe-area-context": "^0.6.2",
     "react-native-screens": "2.0.0-alpha.32",
@@ -46,7 +48,8 @@
     "eslint": "6.8.0",
     "jest": "25.1.0",
     "metro-react-native-babel-preset": "0.58.0",
-    "react-test-renderer": "16.9.0"
+    "react-test-renderer": "16.9.0",
+    "jetifier": "1.6.4"
   },
   "jest": {
     "preset": "react-native"

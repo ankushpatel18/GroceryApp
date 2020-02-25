@@ -1,14 +1,14 @@
 
-import {StyleSheet} from 'react-native';
+import { StyleSheet } from 'react-native';
 
 
 export default StyleSheet.create({
-centerContainer: {
-flex: 1,
-justifyContent: "center",
-alignItems : "center"
-},
-mapContainer: {
+  centerContainer: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
+  },
+  mapContainer: {
     position: 'absolute',
     top: 0,
     left: 0,

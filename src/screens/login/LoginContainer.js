@@ -1,38 +1,75 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-import { View, Text, Alert } from 'react-native';
-import { Button } from 'react-native-elements';
-
+import { View } from 'react-native';
+import MyButton from '../../screens/components/MyButton';
+import MyText from '../../screens/components/MyText';
 import NavigationScreens from '../../utils/NavigationConstants';
 import { authenticateUser } from './LoginActions';
 import Style from './style';
 import NavigationConstants from '../../utils/NavigationConstants';
 import LogHOC from '../../custom_components/LogHOC';
+import OauthHelper from './oauth/OauthHelper';
 
 let TAG = 'LoginContainer';
 class LoginContainer extends Component {
   constructor(props) {
     super(props);
+    this.state = {
+      shouldUserLogin: false
+    };
+  }
+
+  componentDidUpdate() {
+    if (this.state.shouldUserLogin) {
+      this.props.navigation.navigate(NavigationScreens.HOME_NAVIGATOR);
+    }
 
   }
 
-  componentDidUpdate(prevProps) {
-    if (this.props.userAuthenticated) {
-      this.props.navigation.navigate(NavigationScreens.HOME_NAVIGATOR);
-    }
+  _loginNow() {
+  }
+
+  async _loginGoogle() {
+    const helper = await OauthHelper.build();
+    helper.authenticateUserViaGoogle().then(resp => {
+      console.log('Should User Login' + resp)
+      this.setState({ shouldUserLogin: true });
+    })
+      .catch(err => console.log('There was an error' + err.message));
+
+  }
+
+  async _loginFacebook() {
+    const helper = await OauthHelper.build();
+    helper.authenticateUserViaFacebook().then(resp => {
+      console.log('Should User Login' + resp)
+      this.setState({ shouldUserLogin: true });
+    })
+      .catch(err => console.log('There was an error' + err.message));
   }
 
   render() {
     console.log('rendering login called');
     return (
       <View style={Style.centerContainer}>
-        <Button
-          buttonStyle={Style.primareButton}
+
+        <MyButton
           title="Login Now"
-          onPress={() =>
+          customClick={() =>
             this.props.navigation.navigate(NavigationConstants.HOME_NAVIGATOR)
           }
         />
+        <MyButton
+          title="Google Login"
+          customClick={() =>
+            this._loginGoogle()
+          } />
+
+        <MyButton
+          title="Facebook Login"
+          customClick={() =>
+            this._loginFacebook()
+          } />
       </View>
     );
   }
