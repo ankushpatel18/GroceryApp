@@ -1,43 +1,21 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator } from 'react-native';
+import { View, ActivityIndicator, StyleSheet } from 'react-native';
 import { connect } from 'react-redux';
 import NavigationConstants from '../../utils/NavigationConstants';
-import MyButton from './../components/MyButton';
-import { ProductList } from '../components/ProductList';
-impoty
 import { fetchProductsFromServer } from './ProudctListActions';
-import Log from '../../utils/Logger';
-
+import { FlatList } from 'react-native-gesture-handler';
+import MyButton from './../components/MyButton';
+import ProductListItem from '../../components/ProductListItem';
 
 class ProductListContainer extends Component {
-
-  TAG = "ProductListContainer"
   constructor(props) {
     super(props);
-    this.state = { isLoading: true }
+    this.state = { isLoading: true, dataSource: [] };
   }
 
   async componentDidMount() {
-    // this.props.fetchLatestProducts();
-    return fetch('https://us-central1-test-app-6ef40.cloudfunctions.net/app/products')
-      .then((response) => response.json())
-      .then((responseJson) => {
-        console.log('API response')
-        console.log((responseJson))
-        Log.i(this.TAG, 'api response' + (responseJson))
-
-        this.setState({
-          isLoading: false,
-          dataSource: responseJson.products,
-        }, function () {
-
-        });
-
-      })
-      .catch((error) => {
-        console.error(error);
-      });
-
+    console.log('componentDidMount Called');
+    this.props.fetchLatestProducts();
   }
 
   render() {
@@ -46,30 +24,54 @@ class ProductListContainer extends Component {
         <View style={{ flex: 1, padding: 20 }}>
           <ActivityIndicator />
         </View>
-      )
+      );
     }
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
-        <ProductList dataSource={this.state.dataSource} />
+        <FlatList
+          style={{ alignSelf: 'stretch' }}
+          data={this.props.productsList}
+          renderItem={ProductListItem}
+          keyExtractor={item => item.product_id}
+          numColumns={2}
+        />
         <MyButton
           title="Pick a location"
           customClick={() =>
             this.props.navigation.navigate(NavigationConstants.LOCATION_PICKER)
-          } />
-
+          }
+        />
       </View>
     );
   }
-}
 
-const mapDispatchToProps = (dispatch) => {
-
-  return {
-    fetchLatestProducts: () => {
-      dispatch(fetchProductsFromServer());
+  componentDidUpdate(prevProps) {
+    if (this.state.dataSource.length == 0) {
+      console.log('Total products found ' + this.props.productsList.length);
+      this.setState({
+        isLoading: false,
+        dataSource: this.props.productsList,
+      });
     }
   }
 }
 
-const MyComponent = connect(null, mapDispatchToProps)(ProductListContainer);
+const mapDispatchToProps = dispatch => {
+  return {
+    fetchLatestProducts: () => {
+      dispatch(fetchProductsFromServer());
+    },
+  };
+};
+const mapStateToProps = state => {
+  const { productListReducer } = state;
+  return {
+    ...productListReducer,
+  };
+};
+const MyComponent = connect(
+  mapStateToProps,
+  mapDispatchToProps,
+)(ProductListContainer);
+
 export default MyComponent;
