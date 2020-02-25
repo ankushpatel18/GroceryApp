@@ -1,7 +1,7 @@
 import React from 'react';
-import { Text, StyleSheet } from 'react-native';
+import { TouchableHighlight, Text, StyleSheet } from 'react-native';
 
-const MyText = props => {
+const MyTextInput = props => {
     return <Text style={styles.text}>{props.text}</Text>
 };
 
@@ -14,4 +14,4 @@ const styles = StyleSheet.create({
         marginRight: 35,
     },
 });
-export default MyText;
+export default MyTextInput;
