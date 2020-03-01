@@ -39,6 +39,18 @@ target 'GroceryApp' do
   pod 'RNScreens', :path => '../node_modules/react-native-screens'
 
   pod 'TouchID', :path => '../node_modules/react-native-touch-id'
+  
+  pod 'RealmJS', :path => '../node_modules/realm'
+  
+  pod 'react-native-safe-area-context', :path => '../node_modules/react-native-safe-area-context'
+
+  pod 'RNCMaskedView', :path => '../node_modules/@react-native-community/masked-view'
+
+  pod 'RNVectorIcons', :path => '../node_modules/react-native-vector-icons'
+
+  pod 'react-native-razorpay', :path => '../node_modules/react-native-razorpay'
+  pod 'PayPal-iOS-SDK'
+  pod 'react-native-onesignal', :path => '../node_modules/react-native-onesignal'
 
   target 'GroceryAppTests' do
     inherit! :search_paths

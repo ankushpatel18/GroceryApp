@@ -26,6 +26,13 @@ class ProductListContainer extends Component {
         </View>
       );
     }
+
+    itemSelected = (selectedItem) => {
+      this.props.navigation.navigate(NavigationConstants.PRODUCT_DETAILS_SCREEN, {  
+        selectedItem: selectedItem,  
+    })  
+    }
+
     return (
       <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
         <FlatList
