@@ -20,6 +20,7 @@ class ProductDetailsContainer extends Component {
     this.state = {
       product: {},
       quantity: 1,
+      url:''
     };
   }
 
@@ -33,6 +34,15 @@ class ProductDetailsContainer extends Component {
   render() {
     return (
       <Container style={{ backgroundColor: 'white' }}>
+        {this.state.url.length > 0 ?  <WebView
+          source={{
+            uri: this.state.url
+          }}
+          style={{ resizeMode: 'cover', flex: 1 }}
+          injectedJavaScript={`const meta = document.createElement('meta'); meta.setAttribute('content', 'width=width, initial-scale=0.5, maximum-scale=0.5, user-scalable=2.0'); meta.setAttribute('name', 'viewport'); document.getElementsByTagName('head')[0].appendChild(meta); `}
+          scalesPageToFit={false}
+          onLoadEnd={this._onLoadEnd}
+        /> :
         <Content>
         <Image
         source={{uri: this.state.product.image_url}}
@@ -99,12 +109,12 @@ class ProductDetailsContainer extends Component {
               <View style={{ width: 50, height: 1, backgroundColor: 'rgba(44, 62, 80, 0.5)', marginLeft: 7, marginBottom: 10 }} />
               <NBText note>
                 {this.state.product.description}
-                <NBText style={styles.TextStyle} onPress={ ()=> Linking.openURL('https://www.amazon.in/s/ref=nb_sb_ss_organic-pltr-v2_2_5?url=search-alias%3Daps&field-keywords=shoes+for+girls+stylish&sprefix=shoes%2Caps%2C703&crid=2IPKLE6WQ1YMH') } >View more...</NBText>
+                <NBText style={styles.TextStyle} onPress={ ()=>  this.setState({'url':'https://www.amazon.in/s/ref=nb_sb_ss_organic-pltr-v2_2_5?url=search-alias%3Daps&field-keywords=shoes+for+girls+stylish&sprefix=shoes%2Caps%2C703&crid=2IPKLE6WQ1YMH'})} >View more...</NBText>
 
               </NBText>
             </View>
           </View>
-        </Content>
+        </Content>}
       </Container>
     );
   }
