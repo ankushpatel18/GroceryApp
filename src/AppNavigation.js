@@ -25,19 +25,7 @@ const ProductListStackNavigator = createStackNavigator(
     Cart: Cart,
   },
   {
-    defaultNavigationOptions: ({navigation}) => {
-      return {
-        title: 'Listing',
-        headerLeft: (
-          <Icon
-            style={{ paddingLeft: 10 }}
-            onPress={() => navigation.openDrawer()}
-            name="md-menu"
-            size={30}
-          />
-        ),
-      };
-    },
+  
   },
 );
 
@@ -92,3 +80,4 @@ const AppSwitchNavigator = createSwitchNavigator({
 const AppContainer = createAppContainer(AppSwitchNavigator);
 
 export default AppContainer;
+

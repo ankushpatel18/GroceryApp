@@ -1,17 +1,29 @@
 import React, { Component } from 'react';
-import { View, ActivityIndicator, StyleSheet } from 'react-native';
+import { View, ActivityIndicator, StyleSheet,Button } from 'react-native';
 import { connect } from 'react-redux';
 import NavigationConstants from '../../utils/NavigationConstants';
 import { fetchProductsFromServer } from './ProudctListActions';
 import { FlatList } from 'react-native-gesture-handler';
 import MyButton from './../components/MyButton';
 import ProductListItem from '../../components/ProductListItem';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 class ProductListContainer extends Component {
   constructor(props) {
     super(props);
     this.state = { isLoading: true, dataSource: [] };
   }
+
+  static navigationOptions = ({ navigation }) => ({
+    headerLeft: (
+      <Icon
+        style={{ paddingLeft: 10 }}
+        onPress={() => navigation.openDrawer()}
+        name="md-menu"
+        size={30}
+      />
+    ),
+  })
 
   async componentDidMount() {
     console.log('componentDidMount Called');

@@ -7,7 +7,6 @@ import React, { Component } from 'react';
 import { Alert,Text,TouchableOpacity } from 'react-native';
 import { Container, Content, View, Header, Icon, Button, Left, Right, Body, Title, List, ListItem, Thumbnail, Grid, Col, Text as NBText } from 'native-base';
 import MyButton from '../../screens/components/MyButton';
-import Payment from 'react-native-payment_library';
 
 
 export default class Cart extends Component {
@@ -88,7 +87,6 @@ export default class Cart extends Component {
 
   checkout() {
     console.log('Checkout Clicked...');
-    <Payment/>
   }
 }
 
