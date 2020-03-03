@@ -1,14 +1,16 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text} from 'react-native';
+import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
 import {moderateScale} from '../utils/scale';
 
 export default ProductListItem = ({item}) => {
   return (
     <View style={styles.container}>
-      <Image
+      <TouchableOpacity onPress={()=> this.itemSelected(item)}>
+       <Image
         source={{uri: item.image_url}}
         style={styles.thumbnail}
         resizeMode="cover"></Image>
+       </TouchableOpacity>
       <Text numberOfLines={1} style={styles.title}>
         {item.title}
       </Text>
