@@ -1,6 +1,6 @@
 import getDBInstance from './index';
 import _ from 'lodash';
-const TAG_PAITENT_REPO = 'OrdersRepo';
+const TAG_ORDERS_REPO = 'OrdersRepo';
 
 export default class OrdersRepo {
 
@@ -25,11 +25,11 @@ export default class OrdersRepo {
     getOrders = () => {
         try {
             let orders = this.realmInstance.objects(this.schemaName);
-            ordersArray = _.values(products);
+            ordersArray = _.values(orders);
             return ordersArray;
         }
         catch (err) {
-            console.log("getOrders: " + err);
+            console.log(TAG_ORDERS_REPO+"getOrders: " + err);
         }
     }
 
@@ -43,11 +43,11 @@ export default class OrdersRepo {
     saveOrder = (order) => {
         try {
             this.realmInstance.write(() => {
-                this.realmInstance.create(this.schemaName, { ...vital, id: this.getPrimaryKeyId() });
+                this.realmInstance.create(this.schemaName, { ...order, id: this.getPrimaryKeyId() });
             });
-            console.log("saveOrder:success ");
+            console.log(TAG_ORDERS_REPO+"saveOrder:success ");
         } catch (err) {
-            console.log("saveOrder: " + err);
+            console.log(TAG_ORDERS_REPO+"saveOrder: " + err);
         }
     }
 
