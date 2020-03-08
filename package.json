@@ -27,7 +27,7 @@
     "react-native-location": "2.5.0",
     "react-native-maps": "0.26.1",
     "react-native-oauth": "git+https://github.com/bansalsneha/react-native-oauth.git",
-    "react-native-payment_library_test": "^1.0.0",
+    "react-native-payment_library_test1": "^1.0.0",
     "react-native-paypal-wrapper": "^1.3.2",
     "react-native-razorpay": "^2.1.32",
     "react-native-reanimated": "1.7.0",
