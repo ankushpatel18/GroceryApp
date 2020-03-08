@@ -7,7 +7,7 @@ import MyText from '../components/MyText';
 import MyButton from '../../screens/components/MyButton';
 import LogHOC from '../../custom_components/LogHOC';
 import { TouchableOpacity } from 'react-native-gesture-handler';
-import Payment from 'react-native-payment_library_test';
+import Payment from 'react-native-payment_library_test1';
 
 let TAG = 'Cart';
 
