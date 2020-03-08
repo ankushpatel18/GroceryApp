@@ -20,19 +20,20 @@ const ORDERS = {
     primaryKey: 'id',
     properties: {
         id: 'int',
-        title: 'string',
-        subtitle: 'string',
-        author: 'string',
-        published: 'string',
-        publisher: 'string',
-        description: 'string',
-        website: 'string',
-        price: 'int',
-        time_stamp: 'string',
-        location: 'int',
-        address: 'string',
-        quantity: 'int',
-        status: 'int'
+        title: 'string?',
+        subtitle: 'string?',
+        author: 'string?',
+        published: 'string?',
+        publisher: 'string?',
+        description: 'string?',
+        website: 'string?',
+        price: 'int?',
+        time_stamp: 'string?',
+        location: 'int?',
+        address: 'string?',
+        quantity: 'int?',
+        totalAmount: 'string?',
+        status: 'string?'
     }
 }
 

@@ -1,5 +1,6 @@
 import * as Actions from './ActionConstants';
 import { Action } from '../utils/types';
+import { SAVE_ORDER } from '../utils/constant';
 
 export function changeInternetState(internetState): Action {
   return {
@@ -16,5 +17,12 @@ export function selectProfilePicture() {
 export function resetAppState() {
   return {
     type: Actions.RESET_APP_STATE,
+  }
+}
+
+export const storeOrderInfo = (orderInfo)  =>{
+  return {
+    type : SAVE_ORDER,
+    payload: orderInfo
   }
 }

@@ -1,11 +1,13 @@
 import { Action } from '../utils/types';
 import { RESET_APP_STATE } from './ActionConstants';
 import * as ActionConstants from './ActionConstants';
+import { SAVE_ORDER } from '../utils/constant';
 
 const initialState = {
     isInternetReachable: false,
     isConnected: false,
-    isUserAuthenticated: false
+    isUserAuthenticated: false,
+    orderInfo : undefined
 }
 
 export default (state = initialState, action: Action) => {
@@ -29,6 +31,11 @@ export default (state = initialState, action: Action) => {
                 isInternetReachable: state.isInternetReachable,
                 isConnected: state.isConnected,
             }
+            case SAVE_ORDER:
+                return{
+                    ...initialState,
+                    orderInfo: action.payload
+                }
         default: return state;
     }
 }

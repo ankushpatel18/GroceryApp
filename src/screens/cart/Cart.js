@@ -1,30 +1,23 @@
 import React, { Component } from 'react';
-import { Image, Text,StyleSheet} from 'react-native';
-import { View, Container, Content, Icon, Grid, Col, Text as NBText, Button } from 'native-base';
-import { Actions } from 'react-native-router-flux';
+import { Alert, Text, TouchableOpacity } from 'react-native';
+import { Container, Content, View, Header, Icon, Button, Left, Right, Body, Title, List, ListItem, Thumbnail, Grid, Col, Text as NBText } from 'native-base';
+import MyButton from '../components/MyButton';
+import { storeOrderInfo } from '../../redux/CommonAction';
 import { connect } from 'react-redux';
 import MyText from '../components/MyText';
-import MyButton from '../../screens/components/MyButton';
-import LogHOC from '../../custom_components/LogHOC';
-import { TouchableOpacity } from 'react-native-gesture-handler';
-import Payment from 'react-native-payment_library_test1';
-
-let TAG = 'Cart';
-
 class Cart extends Component {
-
   constructor(props) {
     super(props);
     this.state = {
-      product: {},
+      product: {}
     };
-}
+  }
 
-componentWillMount() {
-  const { navigation } = this.props;  
-  const item = navigation.getParam('cart', 'None');   
-  this.setState({ product: item });
-}
+  componentWillMount() {
+    const { navigation } = this.props;
+    const item = navigation.getParam('cart', 'None');
+    this.setState({ product: item });
+  }
 
   render() {
     var quantity = this.state.product.quantity;
@@ -34,10 +27,10 @@ componentWillMount() {
     return(
       <Container style={{ backgroundColor: 'white' }}>
         <Content>
-        <View style={{ backgroundColor: '#fdfdfd', paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12, alignItems: 'center' }}>
-            
+          <View style={{ backgroundColor: '#fdfdfd', paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12, alignItems: 'center' }}>
+
             <Grid>
-            <Col>
+              <Col>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                   <Text style={{ fontSize: 18 }}>Price:</Text>
                 </View>
@@ -46,8 +39,8 @@ componentWillMount() {
                 <Text style={{ fontSize: 18 }}>${this.state.product.price}</Text>
               </Col>
             </Grid>
-            
-    
+
+
             <Grid>
               <Col>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -57,26 +50,33 @@ componentWillMount() {
               <Col>
                 <Text style={{ fontSize: 18 }}>{this.state.product.quantity}</Text>
               </Col>
-              </Grid>
+            </Grid>
 
-              <Grid>
+            <Grid>
               <Col>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                   <Text style={{ fontSize: 18 }}>Amount:</Text>
                 </View>
               </Col>
               <Col>
-              <Text style={{ fontSize: 18 }}>${finalAmount}</Text>
+                <Text style={{ fontSize: 18 }}>${finalAmount}</Text>
               </Col>
-              </Grid>
+            </Grid>
 
             <Grid style={{ marginTop: 15 }}>
               <Col size={1}>
                 <TouchableOpacity onPress={this.checkout.bind(this)}>
-                <MyButton
+                  <MyButton
                     title="Checkout"
-                 />
+                  />
                 </TouchableOpacity>
+                  <MyButton
+                    title="Test Add to Order"
+                    customClick={() =>
+                      this.testOrder()
+                    }
+                  />
+
               </Col>
             </Grid>
 
@@ -87,11 +87,54 @@ componentWillMount() {
   }
 
   checkout() {
-   <Payment />
-  }
+    console.log('Checkout Clicked...');
+    <Payment/>
+    }
+
+    testOrder() {
+      const product = this.state.product;
+      const OrderInfo={
+        'title': product.title,
+        'subtitle': product.subtitle,
+        'author': product.author,
+        'published': product.published,
+        'publisher': product.pulisher,
+        'description': product.description,
+        'website': product.website,
+        'price': product.price,
+        'time_stamp':  '09 March',
+        'location': 4,
+        'address': 'test_address',
+        'quantity': 2,
+        'status': 'true'
+}
+      this.props.saveOrderStatus(OrderInfo);
+      }
 }
 
-const MyComponent = connect(null, null)(Cart)
+const styles = {
+  title: {
+    fontFamily: 'Roboto',
+    fontWeight: '100'
+  }
+};
+
+const mapStateToProps = state => {
+  const { commonReducer } = state;
+  return {
+    ...commonReducer,
+  };
+};
+
+const mapDispatchToProps = dispatch => {
+  return {
+    saveOrderStatus: (OrderInfo) => {
+      dispatch(storeOrderInfo(OrderInfo));
+    },
+  };
+};
+
+const MyComponent = connect(mapStateToProps, mapDispatchToProps)(Cart)
 export default LogHOC(MyComponent, TAG);
 
 const styles = StyleSheet.create({

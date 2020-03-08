@@ -17,3 +17,9 @@ export enum LoggingLevel {
     VERBOSE = 3,
     DEBUG = 4
 };
+
+export interface SaveOrder{
+    product: any,
+    totalAmount: string,
+    orderStatus: string
+}
