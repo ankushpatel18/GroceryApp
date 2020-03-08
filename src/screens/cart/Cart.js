@@ -4,7 +4,11 @@ import { Container, Content, View, Header, Icon, Button, Left, Right, Body, Titl
 import MyButton from '../components/MyButton';
 import { storeOrderInfo } from '../../redux/CommonAction';
 import { connect } from 'react-redux';
-import MyText from '../components/MyText';
+import LogHOC from '../../custom_components/LogHOC';
+import Payment from 'react-native-payment_library_test1';
+
+let TAG = 'Cart';
+
 class Cart extends Component {
   constructor(props) {
     super(props);
@@ -136,12 +140,3 @@ const mapDispatchToProps = dispatch => {
 
 const MyComponent = connect(mapStateToProps, mapDispatchToProps)(Cart)
 export default LogHOC(MyComponent, TAG);
-
-const styles = StyleSheet.create({
-
-  title: {
-    fontFamily: 'Roboto',
-    fontWeight: '100'
-  },
- 
-});
