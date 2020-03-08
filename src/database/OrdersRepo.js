@@ -41,6 +41,8 @@ export default class OrdersRepo {
     }
 
     saveOrder = (order) => {
+        
+        console.log('###Test'+TAG_ORDERS_REPO+"saveOrder:success ");
         try {
             this.realmInstance.write(() => {
                 this.realmInstance.create(this.schemaName, { ...order, id: this.getPrimaryKeyId() });

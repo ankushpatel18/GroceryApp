@@ -4,22 +4,22 @@
 
 // React native and others libraries imports
 import React, { Component } from 'react';
-import { Alert,Text,TouchableOpacity } from 'react-native';
+import { Alert, Text, TouchableOpacity } from 'react-native';
 import { Container, Content, View, Header, Icon, Button, Left, Right, Body, Title, List, ListItem, Thumbnail, Grid, Col, Text as NBText } from 'native-base';
-import MyButton from '../../screens/components/MyButton';
-
-
-export default class Cart extends Component {
+import MyButton from '../components/MyButton';
+import { storeOrderInfo } from '../../redux/CommonAction';
+import { connect } from 'react-redux';
+class Cart extends Component {
   constructor(props) {
-      super(props);
-      this.state = {
-        product: {},
-      };
+    super(props);
+    this.state = {
+      product: {}
+    };
   }
 
   componentWillMount() {
-    const { navigation } = this.props;  
-    const item = navigation.getParam('cart', 'None');   
+    const { navigation } = this.props;
+    const item = navigation.getParam('cart', 'None');
     this.setState({ product: item });
   }
 
@@ -29,14 +29,13 @@ export default class Cart extends Component {
     var price = this.state.product.price;
 
     var finalAmount = quantity * price;
-
-    return(
+    return (
       <Container style={{ backgroundColor: 'white' }}>
         <Content>
-        <View style={{ backgroundColor: '#fdfdfd', paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12, alignItems: 'center' }}>
-            
+          <View style={{ backgroundColor: '#fdfdfd', paddingTop: 10, paddingBottom: 10, paddingLeft: 12, paddingRight: 12, alignItems: 'center' }}>
+
             <Grid>
-            <Col>
+              <Col>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                   <Text style={{ fontSize: 18 }}>Price:</Text>
                 </View>
@@ -45,8 +44,8 @@ export default class Cart extends Component {
                 <Text style={{ fontSize: 18 }}>${this.state.product.price}</Text>
               </Col>
             </Grid>
-            
-    
+
+
             <Grid>
               <Col>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
@@ -56,26 +55,33 @@ export default class Cart extends Component {
               <Col>
                 <Text style={{ fontSize: 18 }}>{this.state.product.quantity}</Text>
               </Col>
-              </Grid>
+            </Grid>
 
-              <Grid>
+            <Grid>
               <Col>
                 <View style={{ flex: 1, justifyContent: 'center' }}>
                   <Text style={{ fontSize: 18 }}>Amount:</Text>
                 </View>
               </Col>
               <Col>
-              <Text style={{ fontSize: 18 }}>${finalAmount}</Text>
+                <Text style={{ fontSize: 18 }}>${finalAmount}</Text>
               </Col>
-              </Grid>
+            </Grid>
 
             <Grid style={{ marginTop: 15 }}>
               <Col size={1}>
                 <TouchableOpacity onPress={this.checkout.bind(this)}>
-                <MyButton
+                  <MyButton
                     title="Checkout"
-                 />
+                  />
                 </TouchableOpacity>
+                  <MyButton
+                    title="Test Add to Order"
+                    customClick={() =>
+                      this.testOrder()
+                    }
+                  />
+
               </Col>
             </Grid>
 
@@ -87,14 +93,49 @@ export default class Cart extends Component {
 
   checkout() {
     console.log('Checkout Clicked...');
-  }
+    }
+
+    testOrder() {
+      const product = this.state.product;
+      const OrderInfo={
+        'title': product.title,
+        'subtitle': product.subtitle,
+        'author': product.author,
+        'published': product.published,
+        'publisher': product.pulisher,
+        'description': product.description,
+        'website': product.website,
+        'price': product.price,
+        'time_stamp':  '09 March',
+        'location': 4,
+        'address': 'test_address',
+        'quantity': 2,
+        'status': 'true'
+}
+      this.props.saveOrderStatus(OrderInfo);
+      }
 }
 
-const styles={
+const styles = {
   title: {
     fontFamily: 'Roboto',
     fontWeight: '100'
   }
 };
 
+const mapStateToProps = state => {
+  const { commonReducer } = state;
+  return {
+    ...commonReducer,
+  };
+};
 
+const mapDispatchToProps = dispatch => {
+  return {
+    saveOrderStatus: (OrderInfo) => {
+      dispatch(storeOrderInfo(OrderInfo));
+    },
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);
