@@ -1,35 +1,36 @@
-/**
-* This is the Main file
-**/
-
-// React native and others libraries imports
 import React, { Component } from 'react';
-import { Alert,Text,TouchableOpacity } from 'react-native';
-import { Container, Content, View, Header, Icon, Button, Left, Right, Body, Title, List, ListItem, Thumbnail, Grid, Col, Text as NBText } from 'native-base';
+import { Image, Text,StyleSheet} from 'react-native';
+import { View, Container, Content, Icon, Grid, Col, Text as NBText, Button } from 'native-base';
+import { Actions } from 'react-native-router-flux';
+import { connect } from 'react-redux';
+import MyText from '../components/MyText';
 import MyButton from '../../screens/components/MyButton';
+import LogHOC from '../../custom_components/LogHOC';
+import { TouchableOpacity } from 'react-native-gesture-handler';
+import Payment from 'react-native-payment_library_test';
 
+let TAG = 'Cart';
 
-export default class Cart extends Component {
+class Cart extends Component {
+
   constructor(props) {
-      super(props);
-      this.state = {
-        product: {},
-      };
-  }
+    super(props);
+    this.state = {
+      product: {},
+    };
+}
 
-  componentWillMount() {
-    const { navigation } = this.props;  
-    const item = navigation.getParam('cart', 'None');   
-    this.setState({ product: item });
-  }
+componentWillMount() {
+  const { navigation } = this.props;  
+  const item = navigation.getParam('cart', 'None');   
+  this.setState({ product: item });
+}
 
   render() {
-
     var quantity = this.state.product.quantity;
     var price = this.state.product.price;
 
     var finalAmount = quantity * price;
-
     return(
       <Container style={{ backgroundColor: 'white' }}>
         <Content>
@@ -86,15 +87,18 @@ export default class Cart extends Component {
   }
 
   checkout() {
-    console.log('Checkout Clicked...');
+   <Payment />
   }
 }
 
-const styles={
+const MyComponent = connect(null, null)(Cart)
+export default LogHOC(MyComponent, TAG);
+
+const styles = StyleSheet.create({
+
   title: {
     fontFamily: 'Roboto',
     fontWeight: '100'
-  }
-};
-
-
+  },
+ 
+});
