@@ -7,7 +7,7 @@ import { connect } from 'react-redux';
 import MyText from '../components/MyText';
 import MyButton from '../../screens/components/MyButton';
 import LogHOC from '../../custom_components/LogHOC';
-import { TouchableOpacity } from 'react-native-gesture-handler';
+import { TouchableOpacity, ScrollView } from 'react-native-gesture-handler';
 import NavigationConstants from '../../utils/NavigationConstants';
 import { WebView } from 'react-native-webview';
 
@@ -33,8 +33,10 @@ class ProductDetailsContainer extends Component {
 
   render() {
     return (
+      <ScrollView>
       <Container style={{ backgroundColor: 'white' }}>
-        {this.state.url.length > 0 ?  <WebView
+        {this.state.url.length > 0 ?  
+        <WebView
           source={{
             uri: this.state.url
           }}
@@ -116,6 +118,7 @@ class ProductDetailsContainer extends Component {
           </View>
         </Content>}
       </Container>
+      </ScrollView>
     );
   }
 
@@ -143,7 +146,7 @@ const styles = StyleSheet.create({
 
     thumbnail: {
       width: '100%',
-      height: '100%',
+      height: '30%',
       borderTopRightRadius : 5,
       borderTopLeftRadius: 5
     },
