@@ -1,11 +1,13 @@
 import React, { Component } from 'react';
-import { Alert, Text, TouchableOpacity } from 'react-native';
+import { Alert, Text } from 'react-native';
 import { Container, Content, View, Header, Icon, Button, Left, Right, Body, Title, List, ListItem, Thumbnail, Grid, Col, Text as NBText } from 'native-base';
 import MyButton from '../components/MyButton';
 import { storeOrderInfo } from '../../redux/CommonAction';
 import { connect } from 'react-redux';
 import LogHOC from '../../custom_components/LogHOC';
 import Payment from 'react-native-payment_library_test1';
+import NavigationConstants from '../../utils/NavigationConstants';
+import userDefaults from 'react-native-user-defaults'
 
 let TAG = 'Cart';
 
@@ -28,6 +30,10 @@ class Cart extends Component {
     var price = this.state.product.price;
 
     var finalAmount = quantity * price;
+    userDefaults.set("amount", finalAmount.toString(), "group.com.company.app", (err, data) => {
+      if(!err) console.log(data)         
+     })
+
     return(
       <Container style={{ backgroundColor: 'white' }}>
         <Content>
@@ -69,11 +75,12 @@ class Cart extends Component {
 
             <Grid style={{ marginTop: 15 }}>
               <Col size={1}>
-                <TouchableOpacity onPress={this.checkout.bind(this)}>
-                  <MyButton
+              <MyButton
                     title="Checkout"
+                    customClick={() =>
+                      this.checkOut()
+                    }
                   />
-                </TouchableOpacity>
                   <MyButton
                     title="Test Add to Order"
                     customClick={() =>
@@ -90,12 +97,12 @@ class Cart extends Component {
     );
   }
 
-  checkout() {
-    console.log('Checkout Clicked...');
-    <Payment/>
+  checkOut() {
+    this.props.navigation.navigate(NavigationConstants.PAYMENT_DEMO)
     }
 
     testOrder() {
+      console.log('test....')
       const product = this.state.product;
       const OrderInfo={
         'title': product.title,
@@ -115,13 +122,6 @@ class Cart extends Component {
       this.props.saveOrderStatus(OrderInfo);
       }
 }
-
-const styles = {
-  title: {
-    fontFamily: 'Roboto',
-    fontWeight: '100'
-  }
-};
 
 const mapStateToProps = state => {
   const { commonReducer } = state;
