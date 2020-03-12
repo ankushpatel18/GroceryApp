@@ -8,4 +8,5 @@ export default {
     HOME_NAVIGATOR: 'HomeNavigator',
     LOCATION_PICKER: 'LocationPicker',
     CART:'Cart',
+    PAYMENT_DEMO:'PaymentDemo'
 }

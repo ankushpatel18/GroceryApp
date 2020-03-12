@@ -54,6 +54,8 @@ target 'GroceryApp' do
     pod 'react-native-google-maps', :path => '../node_modules/react-native-maps'
   
 
+  pod 'RCTUserDefaults', :path => '../node_modules/react-native-user-defaults'
+
   target 'GroceryAppTests' do
     inherit! :search_paths
     # Pods for testing

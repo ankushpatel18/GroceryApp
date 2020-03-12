@@ -13,6 +13,7 @@ import ProductDetailsContainer from './screens/productdetails/ProductDetailsCont
 import MyOrderListContainer from './screens/myorders/MyOrdersListContainer';
 import LocationPickerContainer from './screens/map/LocationPickerContainer';
 import Cart from './screens/cart/Cart';
+import PaymentDemo from './screens/cart/PaymentDemo';
 import actualDimensions from './utils/DeviceDimension';
 import AppDrawer from './AppDrawer';
 
@@ -23,6 +24,7 @@ const ProductListStackNavigator = createStackNavigator(
     LocationPicker: LocationPickerContainer,
     ProductDetails: ProductDetailsContainer,
     Cart: Cart,
+    PaymentDemo:PaymentDemo,
   },
   {
   

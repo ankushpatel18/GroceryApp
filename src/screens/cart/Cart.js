@@ -5,7 +5,6 @@ import MyButton from '../components/MyButton';
 import { storeOrderInfo } from '../../redux/CommonAction';
 import { connect } from 'react-redux';
 import LogHOC from '../../custom_components/LogHOC';
-import Payment from 'react-native-payment_library_test1';
 import NavigationConstants from '../../utils/NavigationConstants';
 import userDefaults from 'react-native-user-defaults'
 
@@ -31,7 +30,7 @@ class Cart extends Component {
 
     var finalAmount = quantity * price;
     userDefaults.set("amount", finalAmount.toString(), "group.com.company.app", (err, data) => {
-      if(!err) console.log(data)         
+      if(!err) console.log(data)
      })
 
     return(
