@@ -8,6 +8,35 @@
   "client": [
     {
       "client_info": {
+        "mobilesdk_app_id": "1:450705780287:android:d6b2f9276a3236b276128a",
+        "android_client_info": {
+          "package_name": "com.eshop"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "450705780287-vpduleisb76hmmcbg187694iri2mhvbl.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCx1lYv1QMWlOxsFD9wJhnUD9EXEhub4T0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "450705780287-vpduleisb76hmmcbg187694iri2mhvbl.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
         "mobilesdk_app_id": "1:450705780287:android:f730720de2ef298776128a",
         "android_client_info": {
           "package_name": "com.groceryapp"
@@ -21,7 +50,7 @@
       ],
       "api_key": [
         {
-          "current_key": "AIzaSyBac0xiqxYsuZEzcVpq-lkPu9ro0-eHbjE"
+          "current_key": "AIzaSyCx1lYv1QMWlOxsFD9wJhnUD9EXEhub4T0"
         }
       ],
       "services": {

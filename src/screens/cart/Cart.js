@@ -6,7 +6,7 @@ import { storeOrderInfo } from '../../redux/CommonAction';
 import { connect } from 'react-redux';
 import LogHOC from '../../custom_components/LogHOC';
 import NavigationConstants from '../../utils/NavigationConstants';
-import userDefaults from 'react-native-user-defaults'
+// import userDefaults from 'react-native-user-defaults'
 
 let TAG = 'Cart';
 
@@ -29,9 +29,9 @@ class Cart extends Component {
     var price = this.state.product.price;
 
     var finalAmount = quantity * price;
-    userDefaults.set("amount", finalAmount.toString(), "group.com.company.app", (err, data) => {
-      if(!err) console.log(data)
-     })
+    // userDefaults.set("amount", finalAmount.toString(), "group.com.company.app", (err, data) => {
+    //   if(!err) console.log(data)
+    //  })
 
     return(
       <Container style={{ backgroundColor: 'white' }}>
