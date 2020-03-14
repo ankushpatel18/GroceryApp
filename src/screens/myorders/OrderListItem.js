@@ -29,7 +29,7 @@ export default OrderListItem = ({item}) => {
         {'Total Amount: '+item.totalAmount}
       </Text>
       <Text numberOfLines={1} style={item.status == 'false'?styles.statusFailure:styles.statusSuccess}>
-        {item.status=='false'?' Payment failed ':' Payment was successfull '}
+        {item.status=='false'?' Transaction was unsuccessfull ':' Transaction was successfull '}
       </Text>
       <View style = {styles.lineStyle} />
     </View>
@@ -43,13 +43,20 @@ const styles = StyleSheet.create({
     padding: moderateScale(10),
     borderRadius: moderateScale(5),
   },
-  
+  statusSuccess: {
+    backgroundColor: '#00ff00',
+    fontSize: moderateScale(16),
+    marginStart : moderateScale(10),
+    marginEnd : moderateScale(10),
+    color: 'black'
+  },
   statusFailure: {
     flex:1,
-    fontSize: moderateScale(14),
+    fontSize: moderateScale(16),
     backgroundColor: '#ff0000',
-    margin: moderateScale(10),
-    borderRadius: moderateScale(5),
+    marginStart : moderateScale(10),
+    marginEnd : moderateScale(10),
+    color: 'black'
   },
   thumbnail: {
     width: '100%',
@@ -63,13 +70,7 @@ const styles = StyleSheet.create({
     marginEnd : moderateScale(10),
     color: 'black'
   },
-  statusSuccess: {
-    backgroundColor: '#00ff00',
-    fontSize: moderateScale(16),
-    marginStart : moderateScale(10),
-    marginEnd : moderateScale(10),
-    color: 'black'
-  },
+  
   header: {
     fontSize: moderateScale(20),
     marginStart : moderateScale(10),
