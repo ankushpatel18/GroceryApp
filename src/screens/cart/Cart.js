@@ -103,6 +103,11 @@ class Cart extends Component {
     testOrder() {
       console.log('test....')
       const product = this.state.product;
+      const finalAmount = this.state.product.quantity * this.state.product.price;
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear();
+      const timeStamp = date+'/'+month+'/'+year
       const OrderInfo={
         'title': product.title,
         'subtitle': product.subtitle,
@@ -112,11 +117,12 @@ class Cart extends Component {
         'description': product.description,
         'website': product.website,
         'price': product.price,
-        'time_stamp':  '09 March',
+        'time_stamp':  timeStamp,
         'location': 4,
         'address': 'test_address',
-        'quantity': 2,
-        'status': 'true'
+        'quantity': product.quantity,
+        'status': 'true',
+        'totalAmount': finalAmount
 }
       this.props.saveOrderStatus(OrderInfo);
       }

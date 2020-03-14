@@ -32,7 +32,7 @@ const ORDERS = {
         location: 'int?',
         address: 'string?',
         quantity: 'int?',
-        totalAmount: 'string?',
+        totalAmount: 'int?',
         status: 'string?'
     }
 }

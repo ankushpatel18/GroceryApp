@@ -1,5 +1,5 @@
 import React from 'react';
-import {StyleSheet, View, Image, Text, TouchableOpacity} from 'react-native';
+import {StyleSheet, View, Text} from 'react-native';
 import {moderateScale} from '../../utils/scale';
 
 export default OrderListItem = ({item}) => {
@@ -8,7 +8,7 @@ export default OrderListItem = ({item}) => {
       <Text numberOfLines={1} style={styles.header}>Order Details</Text>
       <View style = {styles.lineStyle} />
       <Text numberOfLines={1} style={styles.text}>
-        {'Order Date:'+item.time_stamp}
+        {'Order Date: '+item.time_stamp}
       </Text>
       <Text numberOfLines={1} style={styles.text}>
         {'Order Address: '+item.address}
@@ -33,7 +33,6 @@ export default OrderListItem = ({item}) => {
       </Text>
       <View style = {styles.lineStyle} />
     </View>
-    
   );
 };
 const styles = StyleSheet.create({
@@ -41,6 +40,7 @@ const styles = StyleSheet.create({
     flex:1,
     backgroundColor: '#FFFFFF',
     margin: moderateScale(10),
+    padding: moderateScale(10),
     borderRadius: moderateScale(5),
   },
   
@@ -53,9 +53,9 @@ const styles = StyleSheet.create({
   },
   thumbnail: {
     width: '100%',
-    height: moderateScale(100),
-    borderTopRightRadius : moderateScale(5),
-    borderTopLeftRadius: moderateScale(5)
+    height: '30%',
+    borderTopRightRadius : 5,
+    borderTopLeftRadius: 5
   },
   text: {
     fontSize: moderateScale(16),
