@@ -6,6 +6,7 @@ export default {
     MY_ORDERS_LIST: 'MyOrderListScreen',
     APPLICATION_STACK: 'AppStack',
     HOME_NAVIGATOR: 'HomeNavigator',
+    DELIVERY_ADDRESS: 'DeliveryAddress',
     LOCATION_PICKER: 'LocationPicker',
     CART:'Cart',
     PAYMENT_DEMO:'PaymentDemo'

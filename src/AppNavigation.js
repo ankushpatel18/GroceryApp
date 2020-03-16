@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import LoginContainer from './screens/login/LoginContainer';
 import LocalLoginContainer from './screens/login/LocalLoginContainer';
 import ProductListContainer from './screens/home/ProductListContainer';
+import DeliveryAddressContainer from './screens/deliveryaddress/DeliveryAddressContainer';
 import ProductDetailsContainer from './screens/productdetails/ProductDetailsContainer';
 import MyOrderListContainer from './screens/myorders/MyOrdersListContainer';
 import LocationPickerContainer from './screens/map/LocationPickerContainer';
@@ -24,6 +25,7 @@ const ProductListStackNavigator = createStackNavigator(
     LocationPicker: LocationPickerContainer,
     ProductDetails: ProductDetailsContainer,
     Cart: Cart,
+    DeliveryAddress: DeliveryAddressContainer,
     PaymentDemo:PaymentDemo,
   },
   {

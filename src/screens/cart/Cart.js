@@ -75,9 +75,9 @@ class Cart extends Component {
             <Grid style={{ marginTop: 15 }}>
               <Col size={1}>
               <MyButton
-                    title="Checkout"
+                    title="Delivery address"
                     customClick={() =>
-                      this.checkOut()
+                      this.showAddressScreen()
                     }
                   />
                   <MyButton
@@ -100,6 +100,10 @@ class Cart extends Component {
     this.props.navigation.navigate(NavigationConstants.PAYMENT_DEMO)
     }
 
+    showAddressScreen()
+   {
+      this.props.navigation.navigate(NavigationConstants.DELIVERY_ADDRESS)
+    }
     testOrder() {
       console.log('test....')
       const product = this.state.product;
