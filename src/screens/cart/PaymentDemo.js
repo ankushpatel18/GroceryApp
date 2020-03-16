@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Payment from 'react-native-payment_library_final';
+import Payment from 'react-native-payment_lib';
 import DefaultPreference from 'react-native-default-preference';
 
 export default class PaymentDemo extends Component {
