@@ -1,4 +1,4 @@
-package com.groceryapp;
+package com.eshop;
 
 import android.app.Application;
 import android.content.Context;

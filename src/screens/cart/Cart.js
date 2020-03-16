@@ -107,10 +107,10 @@ class Cart extends Component {
     this.props.navigation.navigate(NavigationConstants.PAYMENT_DEMO)
     }
 
-    showAddressScreen()
-   {
+    showAddressScreen() {
       this.props.navigation.navigate(NavigationConstants.DELIVERY_ADDRESS)
     }
+    
     testOrder() {
       console.log('test....')
       const product = this.state.product;

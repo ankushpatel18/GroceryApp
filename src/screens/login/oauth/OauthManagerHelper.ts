@@ -5,10 +5,10 @@ var manager: OAuthManager = null;
 function initialize(resolve, reject) {
     console.log('initializing auth');
     try {
-        manager = new OAuthManager('com.groceryapp');
+        manager = new OAuthManager('com.eshop');
         manager.configure({
             google: {
-                callback_url: 'com.groceryapp',
+                callback_url: 'com.eshop',
                 client_id: '711282872015-ivgpdg0brh0dmgq218nr1sqcht4qs6g9.apps.googleusercontent.com',
                 client_secret: 'O2p7FposZhpNQJTIe6Ut1o4B'
             },
