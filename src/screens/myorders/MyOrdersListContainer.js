@@ -8,6 +8,7 @@ import { FlatList } from 'react-native-gesture-handler';
 import OrdersRepo from '../../database/OrdersRepo';
 import Log from '../../utils/Logger';
 import _ from 'lodash';
+import {NavigationEvents} from 'react-navigation';
 let TAG = 'MyOrdersListContainer';
 export default class MyOrdersListContainer extends Component {
 
@@ -15,6 +16,8 @@ export default class MyOrdersListContainer extends Component {
         super(props);
         this.state = { orderList: [] };
     }
+
+    
 
     componentDidMount(){
       this.getOrders(); 
@@ -35,6 +38,7 @@ export default class MyOrdersListContainer extends Component {
     render() {
         return (
             <View style={{ flex: 1, alignItems: 'center', justifyContent: 'center' }}>
+            <NavigationEvents onDidFocus={() => this.getOrders()} />
             <FlatList
               style={{ alignSelf: 'stretch' }}
               data={this.state.orderList}

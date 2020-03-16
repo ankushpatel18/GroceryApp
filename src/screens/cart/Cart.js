@@ -6,7 +6,7 @@ import { storeOrderInfo } from '../../redux/CommonAction';
 import { connect } from 'react-redux';
 import LogHOC from '../../custom_components/LogHOC';
 import NavigationConstants from '../../utils/NavigationConstants';
-// import userDefaults from 'react-native-user-defaults'
+import DefaultPreference from 'react-native-default-preference';
 
 let TAG = 'Cart';
 
@@ -14,24 +14,31 @@ class Cart extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      product: {}
+      product: {},
+      status:''
     };
   }
 
-  componentWillMount() {
+    componentWillMount() {
     const { navigation } = this.props;
     const item = navigation.getParam('cart', 'None');
     this.setState({ product: item });
+
+    DefaultPreference.get('status').then(function(value) {{
+      currentComponent.setState({ status: value })
+      {currentComponent.props.navigation.pop()}
+    }
+    });
   }
 
-  render() {
-    var quantity = this.state.product.quantity;
-    var price = this.state.product.price;
 
-    var finalAmount = quantity * price;
-    // userDefaults.set("amount", finalAmount.toString(), "group.com.company.app", (err, data) => {
-    //   if(!err) console.log(data)
-    //  })
+  render() {
+      var quantity = this.state.product.quantity;
+      var price = this.state.product.price;
+      
+      var finalAmount = quantity * price;
+      DefaultPreference.set('amount', finalAmount.toString()).then(function() {console.log('done')});
+
 
     return(
       <Container style={{ backgroundColor: 'white' }}>
@@ -107,6 +114,11 @@ class Cart extends Component {
     testOrder() {
       console.log('test....')
       const product = this.state.product;
+      const finalAmount = this.state.product.quantity * this.state.product.price;
+      var date = new Date().getDate();
+      var month = new Date().getMonth() + 1;
+      var year = new Date().getFullYear();
+      const timeStamp = date+'/'+month+'/'+year
       const OrderInfo={
         'title': product.title,
         'subtitle': product.subtitle,
@@ -116,11 +128,12 @@ class Cart extends Component {
         'description': product.description,
         'website': product.website,
         'price': product.price,
-        'time_stamp':  '09 March',
+        'time_stamp':  timeStamp,
         'location': 4,
         'address': 'test_address',
-        'quantity': 2,
-        'status': 'true'
+        'quantity': product.quantity,
+        'status': this.state.status,
+        'totalAmount': finalAmount
 }
       this.props.saveOrderStatus(OrderInfo);
       }
