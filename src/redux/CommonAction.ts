@@ -26,3 +26,10 @@ export const storeOrderInfo = (orderInfo)  =>{
     payload: orderInfo
   }
 }
+
+export const storeAddressInfo = (addressInfo) => {
+  return {
+    type: Actions.SAVE_ADDRESS,
+    payload: addressInfo
+  }
+}

@@ -54,12 +54,12 @@ class ProductListContainer extends Component {
           keyExtractor={item => item.product_id}
           numColumns={2}
         />
-        <MyButton
+        {/* <MyButton
           title="Pick a location"
           customClick={() =>
             this.props.navigation.navigate(NavigationConstants.LOCATION_PICKER)
           }
-        />
+        /> */}
       </View>
     );
   }

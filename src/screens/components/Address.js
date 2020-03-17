@@ -9,12 +9,8 @@ const Form = t.form.Form;
 const AddressConst = t.struct({
     Name: t.String,
     number: t.Integer,
-    pincode: t.Integer,
     address: t.String,
-    city: t.String,
-    state: t.String,
-   
-  
+    pincode: t.Integer
 });
 
 const options = {
@@ -25,18 +21,12 @@ const options = {
       number: {
         error: 'Please enter proper number'
       },
-    pincode:  {
-      error: 'Please enter proper pincode'
-    },
     address: {
       error: 'Please enter proper address'
     },
-    city: {
-      error: 'Please enter proper city'
+    pincode:  {
+      error: 'Please enter postal code.'
     },
-   state:  {
-      error: 'Please enter proper state'
-    }
   }
 };
 
@@ -54,18 +44,22 @@ export default class Address extends Component {
                      style={styles.form} 
                      type={AddressConst}
                       options={options} />
+                       <MyButton
+                        title="Spot on map"
+                        customClick={this.props.locationClick}
+                    />
                     <MyButton
                         title="Proceed to payment"
+
                         customClick={() => {
                             const value = this._form.getValue();
                             console.log('value: ', value);
-                            this.props.paymentClick
+                            if(value) {
+                              this.props.paymentClick(value);
+                            }
                         }}
                     />
-                    <MyButton
-                        title="Pick a location"
-                        customClick={this.props.locationClick}
-                    />
+                   
                </View>
             </ScrollView>
         );

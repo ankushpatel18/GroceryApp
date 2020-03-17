@@ -7,7 +7,8 @@ const initialState = {
     isInternetReachable: false,
     isConnected: false,
     isUserAuthenticated: false,
-    orderInfo : undefined
+    orderInfo : undefined,
+    addressInfo: undefined,
 }
 
 export default (state = initialState, action: Action) => {
@@ -36,6 +37,11 @@ export default (state = initialState, action: Action) => {
                     ...initialState,
                     orderInfo: action.payload
                 }
+                case ActionConstants.SAVE_ADDRESS:
+                    return{
+                        ...initialState,
+                        addressInfo: action.payload
+                    }
         default: return state;
     }
 }
