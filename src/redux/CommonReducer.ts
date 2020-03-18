@@ -7,8 +7,10 @@ const initialState = {
     isInternetReachable: false,
     isConnected: false,
     isUserAuthenticated: false,
-    orderInfo : undefined,
+    itemInfo: undefined,
     addressInfo: undefined,
+    orderInfo : undefined,
+
 }
 
 export default (state = initialState, action: Action) => {

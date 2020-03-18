@@ -33,3 +33,11 @@ export const storeAddressInfo = (addressInfo) => {
     payload: addressInfo
   }
 }
+
+
+export const storeItemInfo = (itemInfo) => {
+  return {
+    type: Actions.SAVE_ITEM,
+    payload: itemInfo
+  }
+}

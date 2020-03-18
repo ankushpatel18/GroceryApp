@@ -2,11 +2,10 @@ import React, { Component } from 'react';
 import { Alert, Text } from 'react-native';
 import { Container, Content, View, Header, Icon, Button, Left, Right, Body, Title, List, ListItem, Thumbnail, Grid, Col, Text as NBText } from 'native-base';
 import MyButton from '../components/MyButton';
-import { storeOrderInfo } from '../../redux/CommonAction';
-import { connect } from 'react-redux';
-import LogHOC from '../../custom_components/LogHOC';
 import NavigationConstants from '../../utils/NavigationConstants';
 import DefaultPreference from 'react-native-default-preference';
+import { storeItemInfo } from '../../redux/CommonAction';
+import { connect } from 'react-redux';
 
 let TAG = 'Cart';
 
@@ -15,7 +14,8 @@ class Cart extends Component {
     super(props);
     this.state = {
       product: {},
-      status:''
+      status:'',
+      finalAmount: 0,
     };
   }
 
@@ -26,7 +26,9 @@ class Cart extends Component {
 
     DefaultPreference.get('status').then(function(value) {{
       currentComponent.setState({ status: value })
-      {currentComponent.props.navigation.pop()}
+      {
+        currentComponent.props.navigation.pop()
+      }
     }
     });
   }
@@ -35,10 +37,9 @@ class Cart extends Component {
   render() {
       var quantity = this.state.product.quantity;
       var price = this.state.product.price;
-      
       var finalAmount = quantity * price;
+      this.state.finalAmount = finalAmount;
       DefaultPreference.set('amount', finalAmount.toString()).then(function() {console.log('done')});
-
 
     return(
       <Container style={{ backgroundColor: 'white' }}>
@@ -87,13 +88,7 @@ class Cart extends Component {
                       this.showAddressScreen()
                     }
                   />
-                  <MyButton
-                    title="Test Add to Order"
-                    customClick={() =>
-                      this.testOrder()
-                    }
-                  />
-
+              
               </Col>
             </Grid>
 
@@ -103,56 +98,25 @@ class Cart extends Component {
     );
   }
 
-  checkOut() {
-    this.props.navigation.navigate(NavigationConstants.PAYMENT_DEMO)
-    }
-
     showAddressScreen() {
+      const item = {
+        product : this.state.product,
+        finalAmount: this.state.finalAmount
+      }
+      this.props.saveItemInfo(item)
       this.props.navigation.navigate(NavigationConstants.DELIVERY_ADDRESS)
     }
     
-    testOrder() {
-      console.log('test....')
-      const product = this.state.product;
-      const finalAmount = this.state.product.quantity * this.state.product.price;
-      var date = new Date().getDate();
-      var month = new Date().getMonth() + 1;
-      var year = new Date().getFullYear();
-      const timeStamp = date+'/'+month+'/'+year
-      const OrderInfo={
-        'title': product.title,
-        'subtitle': product.subtitle,
-        'author': product.author,
-        'published': product.published,
-        'publisher': product.pulisher,
-        'description': product.description,
-        'website': product.website,
-        'price': product.price,
-        'time_stamp':  timeStamp,
-        'location': 4,
-        'address': 'test_address',
-        'quantity': product.quantity,
-        'status': this.state.status,
-        'totalAmount': finalAmount
+   
 }
-      this.props.saveOrderStatus(OrderInfo);
-      }
-}
-
-const mapStateToProps = state => {
-  const { commonReducer } = state;
-  return {
-    ...commonReducer,
-  };
-};
 
 const mapDispatchToProps = dispatch => {
   return {
-    saveOrderStatus: (OrderInfo) => {
-      dispatch(storeOrderInfo(OrderInfo));
+    saveItemInfo: itemInfo => {
+      dispatch(storeItemInfo(itemInfo));
     },
   };
 };
 
-const MyComponent = connect(mapStateToProps, mapDispatchToProps)(Cart)
-export default LogHOC(MyComponent, TAG);
+
+export default connect (null, mapDispatchToProps)(Cart);

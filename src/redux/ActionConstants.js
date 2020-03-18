@@ -16,3 +16,4 @@ export const RESET_APP_STATE = 'RESET_APP_STATE';
 export const STORE_SESSION_FCM_TOKEN = 'STORE_SESSION_FCM_TOKEN';
 
 export const SAVE_ADDRESS ="save_address"
+export const SAVE_ITEM ="save_item"
