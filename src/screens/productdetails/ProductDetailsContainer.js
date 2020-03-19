@@ -145,8 +145,9 @@ export default LogHOC(MyComponent, TAG);
 const styles = StyleSheet.create({
 
     thumbnail: {
-      width: '100%',
-      height: '30%',
+      width: 200,
+      height: 200,
+      alignSelf: 'center',
       borderTopRightRadius : 5,
       borderTopLeftRadius: 5
     },
