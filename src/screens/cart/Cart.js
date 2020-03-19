@@ -103,6 +103,7 @@ class Cart extends Component {
         product : this.state.product,
         finalAmount: this.state.finalAmount
       }
+      console.log('Save Item info... '+JSON.stringify(item))
       this.props.saveItemInfo(item)
       this.props.navigation.navigate(NavigationConstants.DELIVERY_ADDRESS)
     }

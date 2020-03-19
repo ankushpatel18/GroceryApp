@@ -4,6 +4,7 @@ import DefaultPreference from 'react-native-default-preference';
 import { View, Text } from 'native-base';
 import { storeOrderInfo } from '../../redux/CommonAction';
 import { connect } from 'react-redux';
+import LogHOC from '../../custom_components/LogHOC';
 const TAG = 'PaymentDemo';
 class PaymentDemo extends Component {
   constructor(props) {
@@ -16,32 +17,32 @@ class PaymentDemo extends Component {
     let currentComponent = this;
     DefaultPreference.get('status').then(function(value) {{
       currentComponent.setState({ status: value })
-      console.log(TAG+ 'status '+this.state.status)
-      if(this.state.status != '') {
+      console.log(TAG+ 'status '+currentComponent.state.status)
+      if(currentComponent.state.status != '') {
         {
-          this.addOrder()
+          currentComponent.addOrder()
         }
       }
     }
     }); 
   }
 
-  componentWillMount() {
-    let currentComponent = this;
-    DefaultPreference.get('status').then(function(value) {{
-      currentComponent.setState({ status: value })
-      if(this.state.status != '') {
-        {currentComponent.props.navigation.pop()
-        }
-      }
-    }
-    });
-  }
+  // componentWillMount() {
+  //   let currentComponent = this;
+  //   DefaultPreference.get('status').then(function(value) {{
+  //     currentComponent.setState({ status: value })
+  //     if(this.state.status != '') {
+  //       {currentComponent.props.navigation.pop()
+  //       }
+  //     }
+  //   }
+  //   });
+  // }
 
   addOrder() {
-    console.log('add order....')
-    const product = this.state.itemInfo.product;
-    const addressInfo = this.state.addressInfo;
+    console.log('add order....'+JSON.stringify(this.props.itemInfo))
+    const product = this.props.itemInfo.product;
+    const addressInfo = this.props.addressInfo;
     const status = this.state.status;
     const orderStatus = status == 'Aprooved'? true :false;
     console.log(TAG+'Selected product:- '+product);

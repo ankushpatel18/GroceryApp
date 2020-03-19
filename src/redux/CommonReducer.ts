@@ -44,6 +44,11 @@ export default (state = initialState, action: Action) => {
                         ...initialState,
                         addressInfo: action.payload
                     }
+                    case ActionConstants.SAVE_ITEM:
+                    return{
+                        ...initialState,
+                        itemInfo: action.payload
+                    }
         default: return state;
     }
 }
