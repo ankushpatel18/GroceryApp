@@ -1,5 +1,5 @@
 import React from 'react';
-import { TouchableOpacity, Text, StyleSheet } from 'react-native';
+import { TouchableOpacity, Text, StyleSheet, Image } from 'react-native';
 
 const MyButton = props => {
     return (
@@ -18,6 +18,7 @@ const styles = StyleSheet.create({
         marginTop: 16,
         marginLeft: 35,
         marginRight: 35,
+        flexDirection: 'row',
     },
     text: {
         color: '#ffffff'
