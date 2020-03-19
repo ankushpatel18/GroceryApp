@@ -12,6 +12,7 @@ class PaymentDemo extends Component {
     this.state = { status: ''}
   }
 
+
   componentDidUpdate() {
     console.log(TAG+ ' componentDidUpdate called')
     let currentComponent = this;
@@ -42,6 +43,7 @@ class PaymentDemo extends Component {
   addOrder() {
     console.log('add order....'+JSON.stringify(this.props.itemInfo))
     const product = this.props.itemInfo.product;
+    const finalAmount = this.props.itemInfo.finalAmount;
     const addressInfo = this.props.addressInfo;
     const status = this.state.status;
     const orderStatus = status == 'Aprooved'? true :false;
@@ -66,7 +68,7 @@ class PaymentDemo extends Component {
       'address': 'test_address',
       'quantity': product.quantity,
       'status': orderStatus,
-      'totalAmount': this.state.itemInfo.finalAmount,
+      'totalAmount': finalAmount,
 }
     this.props.saveOrderStatus(OrderInfo);
     }
