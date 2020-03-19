@@ -45,8 +45,9 @@ class PaymentDemo extends Component {
     const product = this.props.itemInfo.product;
     const finalAmount = this.props.itemInfo.finalAmount;
     const addressInfo = this.props.addressInfo;
+    //{"Name": "T", "address": "Test", "number": 1234, "pincode": 123456}
     const status = this.state.status;
-    const orderStatus = status == 'Aprooved'? true :false;
+    const orderStatus = status == 'Approved'? true :false;
     console.log(TAG+'Selected product:- '+product);
     console.log(TAG+'Selected Delivery address:- '+addressInfo);
     console.log(TAG+'Payment status- '+status);
@@ -65,7 +66,7 @@ class PaymentDemo extends Component {
       'price': product.price,
       'time_stamp':  timeStamp,
       'location': 4,
-      'address': 'test_address',
+      'address': addressInfo.Name+'\n'+addressInfo.address+'\n'+'\nPincode: '+addressInfo.address+'\nContact No: '+addressInfo.number,
       'quantity': product.quantity,
       'status': orderStatus,
       'totalAmount': finalAmount,
