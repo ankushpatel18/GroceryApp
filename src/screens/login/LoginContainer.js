@@ -40,14 +40,15 @@ class LoginContainer extends Component {
 
  
   async _loginFacebook() {
-    const helper = await OauthHelper.build();
-    helper
-      .authenticateUserViaFacebook()
-      .then(resp => {
-        console.log('Should User Login' + resp);
-        this.setState({shouldUserLogin: true});
-      })
-      .catch(err => console.log('There was an error' + err.message));
+    // const helper = await OauthHelper.build();
+    // helper
+    //   .authenticateUserViaFacebook()
+    //   .then(resp => {
+    //     console.log('Should User Login' + resp);
+    //     this.setState({shouldUserLogin: true});
+    //   })
+    //   .catch(err => console.log('There was an error' + err.message));
+    this.props.navigation.navigate(NavigationConstants.HOME_NAVIGATOR);
   }
 
   render() {
@@ -58,6 +59,7 @@ class LoginContainer extends Component {
             style={{width:100, height:100, alignSelf:'center'}}
             source={require('../../assets/app_logo.png')}
           />
+
         <TouchableOpacity
           style={[styles.btnParent, {backgroundColor: '#4267B2'}]}
           onPress={() => this._loginFacebook()}>

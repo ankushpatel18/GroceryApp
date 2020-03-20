@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
+import {Alert} from 'react-native';
 import Payment from 'react-native-payment_lib';
 import DefaultPreference from 'react-native-default-preference';
 import { View, Text } from 'native-base';
 import { storeOrderInfo } from '../../redux/CommonAction';
 import { connect } from 'react-redux';
+import NavigationConstants from '../../utils/NavigationConstants';
 import LogHOC from '../../custom_components/LogHOC';
 const TAG = 'PaymentDemo';
 class PaymentDemo extends Component {
@@ -19,13 +21,17 @@ class PaymentDemo extends Component {
     DefaultPreference.get('status').then(function(value) {{
       currentComponent.setState({ status: value })
       console.log(TAG+ 'status '+currentComponent.state.status)
-      if(currentComponent.state.status != '') {
-        {
-          currentComponent.addOrder()
-        }
-      }
+      // if(currentComponent.state.status != '') {
+      //   {
+
+      //   }
+      // }
     }
     }); 
+  }
+
+  componentDidMount() {
+    console.log(TAG+ ' componentDidMount called')
   }
 
   // componentWillMount() {
@@ -40,14 +46,14 @@ class PaymentDemo extends Component {
   //   });
   // }
 
-  addOrder() {
-    console.log('add order....'+JSON.stringify(this.props.itemInfo))
+  addOrder(orderStatus) {
+    console.log('add order....itemInfo: '+JSON.stringify(this.props.itemInfo)+' addressInfo : '+this.props.addressInfo);
     const product = this.props.itemInfo.product;
     const finalAmount = this.props.itemInfo.finalAmount;
     const addressInfo = this.props.addressInfo;
     //{"Name": "T", "address": "Test", "number": 1234, "pincode": 123456}
     const status = this.state.status;
-    const orderStatus = status == 'Approved'? true :false;
+    //const orderStatus = status == 'Approved'? true :false;
     console.log(TAG+'Selected product:- '+product);
     console.log(TAG+'Selected Delivery address:- '+addressInfo);
     console.log(TAG+'Payment status- '+status);
@@ -77,7 +83,44 @@ class PaymentDemo extends Component {
   render() {
     return (
 
-        <Payment/>
+        <Payment onTransactionStateChange={this._onTransactionStateChange}/>
+    );
+  }
+
+  
+  /**
+   * Navigation change listener callback to handle navigation state changes.
+   */
+  _onTransactionStateChange = (status, data) => {
+    console.log(TAG+ ' _onTransactionStateChange status: '+status+' data: '+data);
+    if(status==='success'){
+      this.setState({status : true})
+      this.addOrder(true);
+      alert(`Transaction Successful \n ${data}`);
+    }else{
+      this.setState({status : false})
+      this.addOrder(false);
+      alert(`Transaction Failed \n ${data}`);
+    }
+    
+  }
+
+  _handleOkPress(status){
+   if(status==='success'){
+    this.props.navigation.navigate(NavigationConstants.HOME_NAVIGATOR);
+   }else{
+    console.log(TAG+ 'alert dismiss');
+   }
+  }
+
+  _showErrorAlert(title, error,status) {
+    Alert.alert(
+      title,
+      error,
+      [
+        { text: 'OK', onPress: () => { this._handleOkPress(status) } },
+      ],
+      { cancelable: false }
     );
   }
 

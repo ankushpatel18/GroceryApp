@@ -16,13 +16,13 @@ const AddressConst = t.struct({
 const options = {
   fields: {
     Name:  {
-        error: 'Please enter proper name'
+        error: 'Please enter valid name'
       },
       number: {
-        error: 'Please enter proper number'
+        error: 'Please enter valid number'
       },
     address: {
-      error: 'Please enter proper address'
+      error: 'Please enter valid address'
     },
     pincode:  {
       error: 'Please enter postal code.'
@@ -53,6 +53,7 @@ export default class Address extends Component {
 
                         customClick={() => {
                             const value = this._form.getValue();
+                           //const value =  {"Name": "T", "address": "Test", "number": 1234, "pincode": 123456}
                             console.log('value: ', value);
                             if(value) {
                               this.props.paymentClick(value);
