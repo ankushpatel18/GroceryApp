@@ -7,15 +7,16 @@ const initialState = {
     isInternetReachable: false,
     isConnected: false,
     isUserAuthenticated: false,
-    itemInfo: undefined,
+    productInfo: undefined,
     addressInfo: undefined,
     orderInfo : undefined,
 
 }
 
 export default (state = initialState, action: Action) => {
-
+    console.log('###action.type '+action.type+' state : '+JSON.stringify(state));   
     switch (action.type) {
+        
         case ActionConstants.INTERNET_CHANGED:
             const updatedState = {
                 ...state, isInternetReachable: action.payload.isInternetReachable,
@@ -30,24 +31,24 @@ export default (state = initialState, action: Action) => {
             };
         case RESET_APP_STATE:
             return {
-                ...initialState,
+                ...state,
                 isInternetReachable: state.isInternetReachable,
                 isConnected: state.isConnected,
             }
             case SAVE_ORDER:
                 return{
-                    ...initialState,
+                    ...state,
                     orderInfo: action.payload
                 }
                 case ActionConstants.SAVE_ADDRESS:
                     return{
-                        ...initialState,
+                        ...state,
                         addressInfo: action.payload
                     }
                     case ActionConstants.SAVE_ITEM:
                     return{
-                        ...initialState,
-                        itemInfo: action.payload
+                        ...state,
+                        productInfo: action.payload
                     }
         default: return state;
     }

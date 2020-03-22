@@ -9,5 +9,6 @@ export default {
     DELIVERY_ADDRESS: 'DeliveryAddress',
     LOCATION_PICKER: 'LocationPicker',
     CART:'Cart',
-    PAYMENT_DEMO:'PaymentDemo'
+    PAYMENT_DEMO:'PaymentDemo',
+    PRODUCT_LIST:'DashboardNavigator'
 }

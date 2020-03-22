@@ -40,15 +40,14 @@ class LoginContainer extends Component {
 
  
   async _loginFacebook() {
-    // const helper = await OauthHelper.build();
-    // helper
-    //   .authenticateUserViaFacebook()
-    //   .then(resp => {
-    //     console.log('Should User Login' + resp);
-    //     this.setState({shouldUserLogin: true});
-    //   })
-    //   .catch(err => console.log('There was an error' + err.message));
-    this.props.navigation.navigate(NavigationConstants.HOME_NAVIGATOR);
+    const helper = await OauthHelper.build();
+    helper
+      .authenticateUserViaFacebook()
+      .then(resp => {
+        console.log('Should User Login' + resp);
+        this.setState({shouldUserLogin: true});
+      })
+      .catch(err => console.log('There was an error' + err.message));
   }
 
   render() {

@@ -99,12 +99,10 @@ class Cart extends Component {
   }
 
     showAddressScreen() {
-      const item = {
-        product : this.state.product,
-        finalAmount: this.state.finalAmount
-      }
-      console.log('Save Item info... '+JSON.stringify(item))
-      this.props.saveItemInfo(item)
+      this.state.product.finalAmount = this.state.finalAmount;
+      console.log('Saving Item info... '+JSON.stringify(this.state.product))
+      this.props.saveItemInfo(this.state.product)
+      console.log('After saved item '+JSON.stringify(this.props.productInfo))
       this.props.navigation.navigate(NavigationConstants.DELIVERY_ADDRESS)
     }
     
@@ -119,5 +117,10 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-
-export default connect (null, mapDispatchToProps)(Cart);
+const mapStateToProps = state => {
+  const { commonReducer } = state;
+  return {
+    ...commonReducer,
+  };
+};
+export default connect(mapStateToProps, mapDispatchToProps)(Cart);

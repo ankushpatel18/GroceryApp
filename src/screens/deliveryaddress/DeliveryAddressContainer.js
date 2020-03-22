@@ -32,4 +32,11 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(null, mapDispatchToProps)(DeliveryAddressContainer);
+const mapStateToProps = state => {
+  const { commonReducer } = state;
+  return {
+    ...commonReducer,
+  };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(DeliveryAddressContainer);

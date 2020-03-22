@@ -16,40 +16,17 @@ class PaymentDemo extends Component {
 
 
   componentDidUpdate() {
-    console.log(TAG+ ' componentDidUpdate called')
-    let currentComponent = this;
-    DefaultPreference.get('status').then(function(value) {{
-      currentComponent.setState({ status: value })
-      console.log(TAG+ 'status '+currentComponent.state.status)
-      // if(currentComponent.state.status != '') {
-      //   {
-
-      //   }
-      // }
-    }
-    }); 
+    console.log(TAG+ ' componentDidUpdate called productInfo: '+JSON.stringify(this.props.productInfo))
   }
 
   componentDidMount() {
-    console.log(TAG+ ' componentDidMount called')
+    console.log(TAG+ ' componentDidMount called productInfo: '+JSON.stringify(this.props.productInfo))
   }
 
-  // componentWillMount() {
-  //   let currentComponent = this;
-  //   DefaultPreference.get('status').then(function(value) {{
-  //     currentComponent.setState({ status: value })
-  //     if(this.state.status != '') {
-  //       {currentComponent.props.navigation.pop()
-  //       }
-  //     }
-  //   }
-  //   });
-  // }
-
   addOrder(orderStatus) {
-    console.log('add order....itemInfo: '+JSON.stringify(this.props.itemInfo)+' addressInfo : '+this.props.addressInfo);
-    const product = this.props.itemInfo.product;
-    const finalAmount = this.props.itemInfo.finalAmount;
+    console.log('add order....productInfo: '+JSON.stringify(this.props.productInfo)+' addressInfo : '+JSON.stringify(this.props.addressInfo));
+    const product = this.props.productInfo;
+    const finalAmount = this.props.productInfo.finalAmount;
     const addressInfo = this.props.addressInfo;
     //{"Name": "T", "address": "Test", "number": 1234, "pincode": 123456}
     const status = this.state.status;
@@ -72,7 +49,7 @@ class PaymentDemo extends Component {
       'price': product.price,
       'time_stamp':  timeStamp,
       'location': 4,
-      'address': addressInfo.Name+'\n'+addressInfo.address+'\n'+'\nPincode: '+addressInfo.address+'\nContact No: '+addressInfo.number,
+      'address': addressInfo.Name+'\n'+addressInfo.address+'\n'+'\nPincode: '+addressInfo.pincode+'\nContact No: '+addressInfo.number,
       'quantity': product.quantity,
       'status': orderStatus,
       'totalAmount': finalAmount,
@@ -95,21 +72,25 @@ class PaymentDemo extends Component {
     console.log(TAG+ ' _onTransactionStateChange status: '+status+' data: '+data);
     if(status==='success'){
       this.setState({status : true})
-      this.addOrder(true);
-      alert(`Transaction Successful \n ${data}`);
+      this.addOrder('true');
+      this._showErrorAlert(status,'Payment was successfull',true);
+      //alert(`Transaction Successful \n ${data}`);
     }else{
       this.setState({status : false})
-      this.addOrder(false);
-      alert(`Transaction Failed \n ${data}`);
+      this.addOrder('false');
+      //alert(`Transaction Failed \n ${data}`);
+      this._showErrorAlert(status,'Payment was failed', false);
     }
     
   }
 
   _handleOkPress(status){
-   if(status==='success'){
-    this.props.navigation.navigate(NavigationConstants.HOME_NAVIGATOR);
+    console.log(TAG+ ' _handleOkPress status : '+status);
+   if(status){
+    console.log(TAG+ ' navigate to Home');
+    this.props.navigation.navigate(NavigationConstants.PRODUCT_LIST);
    }else{
-    console.log(TAG+ 'alert dismiss');
+    console.log(TAG+ 'alert dismiss payment failure');
    }
   }
 
